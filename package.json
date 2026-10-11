@@ -1,0 +1,19 @@
+{
+  "name": "g-fit-share",
+  "version": "0.1.0",
+  "description": "Create Strava-style shareable images from your workout export. Private, offline-first, installable PWA. Zero runtime dependencies.",
+  "private": true,
+  "license": "MIT",
+  "author": "Ananthu Kanive",
+  "keywords": ["fitness", "strava", "tcx", "gpx", "pwa", "vite", "typescript", "canvas"],
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vite": "^6.0.0"
+  }
+}

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>g-fit-share — workout share images</title>
+  <meta name="description" content="Create Strava-style shareable images from your Google Fit / TCX activity export. Private, offline, installable." />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="dot"></span> g-fit-share</div>
+    <button id="installBtn" class="btn ghost" hidden>Install app</button>
+  </header>
+
+  <main class="wrap">
+    <section class="card" id="uploadCard">
+      <h1>Workout → share image</h1>
+      <p class="muted">Upload a <code>.tcx</code> export (Google Fit / Garmin). Everything stays on your device.</p>
+      <div id="drop" class="drop" tabindex="0" role="button" aria-label="Upload activity file">
+        <div class="drop-big">Drop <code>.tcx</code> here or <span class="link">browse</span></div>
+        <div class="muted small">Try it: <button id="sampleBtn" class="btn small">Load sample run (5K)</button></div>
+        <input id="fileInput" type="file" accept=".tcx,.xml" hidden />
+      </div>
+      <div id="fileStatus" class="status muted">No file loaded.</div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>1 · Layout</h2>
+        <div id="tplPicker" class="tpls"></div>
+
+        <h2>2 · Data</h2>
+        <div id="statToggles" class="checks"></div>
+        <label class="row">Title <input id="titleInput" type="text" maxlength="28" placeholder="Morning Run" /></label>
+        <label class="row">Stat style
+          <select id="styleSel">
+            <option value="minimal">Minimal (text only)</option>
+            <option value="cards">Cards (boxed)</option>
+          </select>
+        </label>
+        <label class="row">Units
+          <select id="unitsSel">
+            <option value="metric">Metric (km)</option>
+            <option value="imperial">Imperial (mi)</option>
+          </select>
+        </label>
+
+        <h2>3 · Background</h2>
+        <div class="row">
+          <input id="bgInput" type="file" accept="image/*" />
+          <button id="bgClear" class="btn ghost small">Clear</button>
+        </div>
+        <label class="row">Overlay <input id="overlayRange" type="range" min="0" max="85" value="45" /></label>
+        <label class="row">Accent <input id="accentInput" type="color" value="#f97316" /></label>
+        <label class="row check">Transparent background <input id="transparentChk" type="checkbox" /></label>
+        <p class="muted small">Transparent skips the gradient when no photo is set — PNG keeps its alpha for overlays. Text switches to dark ink.</p>
+        <label class="row check">Watermark <input id="watermarkChk" type="checkbox" checked /></label>
+      </div>
+
+      <div class="card">
+        <h2>Preview</h2>
+        <canvas id="preview" width="1080" height="1350" role="img" aria-label="Share image preview"></canvas>
+        <div id="workoutMeta" class="muted small"></div>
+        <div class="actions">
+          <button id="dlBtn" class="btn primary" disabled>Download PNG</button>
+          <button id="shareBtn" class="btn" disabled>Share…</button>
+          <button id="copyBtn" class="btn ghost" disabled>Copy</button>
+        </div>
+      </div>
+    </section>
+
+    <p class="muted small foot">PWA · offline-capable · no upload, no account. Add formats later via <code>src/adapters/</code>.</p>
+  </main>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
