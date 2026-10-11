@@ -5,6 +5,10 @@
   "private": true,
   "license": "MIT",
   "author": "Ananthu Kanive",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:LonelyCpp/g-fit-share.git"
+  },
   "keywords": ["fitness", "strava", "tcx", "gpx", "pwa", "vite", "typescript", "canvas"],
   "type": "module",
   "scripts": {
